@@ -4,6 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import redehexen.combatRestrain.managers.ConfigManager;
+
 public class CombatRestrainCommand implements CommandExecutor {
 	
 	private static final String SET_COMMAND = "set";

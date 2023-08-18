@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import redehexen.combatRestrain.CombatRestrain;
+import redehexen.combatRestrain.managers.ConfigManager;
 
 public class SetRegionSubcommand implements CombatRestrainSubcommand {
 

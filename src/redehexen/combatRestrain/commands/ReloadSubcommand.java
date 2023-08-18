@@ -3,6 +3,7 @@ package redehexen.combatRestrain.commands;
 import org.bukkit.command.CommandSender;
 
 import redehexen.combatRestrain.CombatRestrain;
+import redehexen.combatRestrain.managers.ConfigManager;
 
 public class ReloadSubcommand implements CombatRestrainSubcommand {
 
