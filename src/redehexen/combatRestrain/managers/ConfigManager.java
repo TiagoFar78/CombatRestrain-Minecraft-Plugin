@@ -16,6 +16,8 @@ public class ConfigManager {
 		instance = new ConfigManager();
 	}
 	
+	private int _wallDistanceToShowBlocks;
+	
 	private String _positionSetMessage;
 	private String _reloadedMessage;
 	
@@ -29,6 +31,8 @@ public class ConfigManager {
 	private ConfigManager() {
 		YamlConfiguration config = CombatRestrain.getYamlConfiguration();
 		
+		FORCAR ERRO FAZER TUDO AQUI PARA CIMA
+		
 		_positionSetMessage = config.getString("Messages.Warnings.PositionSet").replace("&", "§");
 		_reloadedMessage = config.getString("Messages.Warnings.Reloaded").replace("&", "§");
 		
@@ -39,6 +43,10 @@ public class ConfigManager {
 		_setPositionUsageMessage = config.getString("Messages.Usage.SetPosition").replace("&", "§");
 		_reloadUsageMessage = config.getString("Messages.Usage.Reload").replace("&", "§");
 	}
+	
+	public int getWallDistanceToShowBlocks() {
+        return _wallDistanceToShowBlocks;
+    }
 	
 	public String getPositionSetMessage() {
         return _positionSetMessage;

@@ -1,0 +1,13 @@
+WallDistanceToShowBlocks: 5
+Messages:
+  Warnings:
+    PositionSet: "&aPosition set successfully. Dont forget to use &f/ClanDominanceAlert reload"
+    Reloaded: "&aConfig was reloaded successfully"
+  Errors:
+    NotAllowed: "&cNot allowed"
+    WrongIndex: "&cIndex must be 1 or 2"
+    MustBePlayer: "&cOnly players can execute this command"
+  Usage:
+    SetPosition: "&eUsage: /ClanDominanceAlert set <name> <index:1/2>"
+    Reload: "&eUsage: /ClanDominanceAlert reload"
+Walls:
