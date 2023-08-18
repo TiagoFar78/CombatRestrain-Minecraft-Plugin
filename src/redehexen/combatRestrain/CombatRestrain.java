@@ -7,10 +7,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import redehexen.combatRestrain.commands.CombatRestrainCommand;
+
 public class CombatRestrain extends JavaPlugin {
 	
-	public static final String SET_REGION_PERMISSION = "TF_ClanDominanceAlert.SetPosition";
-	public static final String RELOAD_PERMISSION = "TF_ClanDominanceAlert.Reload";
+	public static final String SET_REGION_PERMISSION = "TF_CombatRestrain.SetPosition";
+	public static final String RELOAD_PERMISSION = "TF_CombatRestrain.Reload";
 	
 	@Override
 	public void onEnable() {		
@@ -20,7 +22,7 @@ public class CombatRestrain extends JavaPlugin {
 		
 //		getServer().getPluginManager().registerEvents(new Events(), this);
 		
-//		getCommand("clandominancealert").setExecutor(new ClanDominanceAlertCommand());
+		getCommand("CombatRestrain").setExecutor(new CombatRestrainCommand());
 	}
 	
 	public static YamlConfiguration getYamlConfiguration() {
