@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import redehexen.combatRestrain.CombatRestrain;
 import redehexen.combatRestrain.walls.Wall;
@@ -45,6 +46,17 @@ public class WallsManager {
 		int z = config.getInt(path + ".Loc" + locationIndex + ".Z");
 		
 		return new Location(Bukkit.getWorld(worldName), x, y, z);
+	}
+	
+	public static void analyzeMovement(Player player, Location loc) {
+		// TODO check if player is in combat and return if not
+		
+		for (Wall wall : walls) {
+			if (wall.isCloseToWall(loc)) {
+				// TODO ativar os vidros para o jogador
+				return;
+			}
+		}
 	}
 
 }

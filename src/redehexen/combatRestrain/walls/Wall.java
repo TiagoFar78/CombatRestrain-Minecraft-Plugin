@@ -1,8 +1,11 @@
 package redehexen.combatRestrain.walls;
 
+import java.util.Hashtable;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 import redehexen.combatRestrain.managers.ConfigManager;
 
@@ -10,6 +13,7 @@ public class Wall {
 	
 	private Location _loc1;
 	private Location _loc2;
+	private Hashtable<Player, PlayerBarrier> playersBarriers = new Hashtable<Player, PlayerBarrier>();
 	
 	public Wall(Location loc1, Location loc2) {		
 		World world = Bukkit.getWorld(loc1.getWorld().getName());
@@ -44,6 +48,8 @@ public class Wall {
 		_loc2 = new Location(world, x2, y2, z2);
 	}
 	
+//	>--------------------------------------{ Wall }--------------------------------------<
+	
 	public boolean isCloseToWall(Location loc) {
 		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
 		
@@ -68,5 +74,15 @@ public class Wall {
 		
 		return borderCord <= cord && cord <= borderCord + closeDistance;
 	}
-
+	
+//	>------------------------------------{ Barrier }------------------------------------<
+	
+	public void addBarrier(Player player) {
+		
+	}
+	
+	public void removePlayer(Player player) {
+		playersBarriers.remove(player);
+	}
+	
 }
