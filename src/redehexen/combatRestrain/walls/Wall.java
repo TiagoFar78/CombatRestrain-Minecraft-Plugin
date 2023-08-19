@@ -60,7 +60,7 @@ public class Wall {
 		return isCloseToBorder(x, _loc1.getBlockX(), false, closeDistance, y) || 
 				isCloseToBorder(x, _loc2.getBlockX(), true, closeDistance, y) ||
 				isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y) ||
-				isCloseToBorder(x, _loc2.getBlockZ(), true, closeDistance, y);
+				isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y);
 	}
 	
 	private boolean isCloseToBorder(int cord, int borderCord, boolean isFurtherBorder, int closeDistance, int yCord) {
@@ -75,17 +75,63 @@ public class Wall {
 		return borderCord <= cord && cord <= borderCord + closeDistance;
 	}
 	
-	private Location getCentralBlock() {
+	private Location getCentralBlock(Location loc) {
+		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
+		
+		int x = loc.getBlockX();
+		int y = loc.getBlockY();
+		int z = loc.getBlockZ();
+		
+		if (isCloseToBorder(x, _loc1.getBlockX(), false, closeDistance, y)) {
+			return new Location(loc.getWorld(), x, y, _loc1.getBlockZ());
+		}
+		
+		if (isCloseToBorder(x, _loc2.getBlockX(), true, closeDistance, y)) {
+			return new Location(loc.getWorld(), x, y, _loc2.getBlockZ());
+		}
+		
+		if (isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y)) {
+			return new Location(loc.getWorld(), _loc1.getBlockX(), y, z);
+		}
+		
+		if (isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y)) {
+			return new Location(loc.getWorld(), _loc2.getBlockX(), y, z);
+		}
 		
 		return null;
 	}
 	
 	private boolean isXAxis(Location centralBlock) {
-		return false;
+		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
+
+		int y = centralBlock.getBlockY();
+		int z = centralBlock.getBlockZ();
+		
+		return isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y) ||
+				isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y);
 	}
 	
 	private int getFixedCord(Location centralBlock) {
-		return 1;
+		int x = centralBlock.getBlockX();
+		int z = centralBlock.getBlockZ();
+		
+		if (x == _loc1.getBlockX()) {
+			return _loc1.getBlockZ();
+		}
+		
+		if (x == _loc2.getBlockX()) {
+			return _loc2.getBlockZ();
+		}
+		
+		if (z == _loc1.getBlockZ()) {
+			return _loc1.getBlockX();
+		}
+		
+		if (z == _loc2.getBlockZ()) {
+			return _loc2.getBlockX();
+		}
+		
+		return 0;
 	}
 	
 //	>------------------------------------{ Barrier }------------------------------------<
@@ -103,17 +149,22 @@ public class Wall {
 	}
 	
 	public void hideBarrier(Player player) {
+		PlayerBarrier barrier = getBarrier(player);
+		if (barrier == null) {
+			return;
+		}
 		
+		barrier.removeBarrier(player);
 	}
 	
-	public void showBarrier(Player player) {		
+	public void showBarrier(Player player) {
 		PlayerBarrier barrier = getBarrier(player);
 		if (barrier == null) {
 			barrier = new PlayerBarrier();
 			addBarrierToList(player, barrier);
 		}
 
-		Location centralBlock = getCentralBlock();
+		Location centralBlock = getCentralBlock(player.getLocation());
 		
 		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock), getFixedCord(centralBlock));
 	}
