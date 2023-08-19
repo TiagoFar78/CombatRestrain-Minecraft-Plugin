@@ -13,7 +13,7 @@ public class Wall {
 	
 	private Location _loc1;
 	private Location _loc2;
-	private Hashtable<Player, PlayerBarrier> playersBarriers = new Hashtable<Player, PlayerBarrier>();
+	private Hashtable<Player, PlayerBarrier> _playersBarriers = new Hashtable<Player, PlayerBarrier>();
 	
 	public Wall(Location loc1, Location loc2) {		
 		World world = Bukkit.getWorld(loc1.getWorld().getName());
@@ -75,14 +75,43 @@ public class Wall {
 		return borderCord <= cord && cord <= borderCord + closeDistance;
 	}
 	
+	private Location getCentralBlock() {
+		
+		return null;
+	}
+	
+	private boolean isXAxis(Location loc) {
+		return false;
+	}
+	
 //	>------------------------------------{ Barrier }------------------------------------<
 	
-	public void addBarrier(Player player) {
+	private void addBarrierToList(Player player, PlayerBarrier barrier) {
+		_playersBarriers.put(player, barrier);
+	}
+	
+	private void removeBarrierFromList(Player player) {
+		_playersBarriers.remove(player);
+	}
+	
+	private PlayerBarrier getBarrier(Player player) {
+		return _playersBarriers.get(player);
+	}
+	
+	public void hideBarrier(Player player) {
 		
 	}
 	
-	public void removePlayer(Player player) {
-		playersBarriers.remove(player);
+	public void showBarrier(Player player) {		
+		PlayerBarrier barrier = getBarrier(player);
+		if (barrier == null) {
+			barrier = new PlayerBarrier();
+			addBarrierToList(player, barrier);
+		}
+
+		Location centralBlock = getCentralBlock();
+		
+		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock));
 	}
 	
 }
