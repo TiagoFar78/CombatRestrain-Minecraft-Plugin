@@ -51,12 +51,42 @@ public class WallsManager {
 	public static void analyzeMovement(Player player, Location loc) {
 		// TODO check if player is in combat and return if not
 		
+		Wall closeWall = getCloseWall(loc);
+		if (closeWall == null) {
+			return;
+		}
+
+		closeWall.showBarrier(player);
+	}
+	
+	public static void playerEnteredCombat(Player player) {
+		Location loc = player.getLocation();
+		
+		Wall closeWall = getCloseWall(loc);
+		if (closeWall == null) {
+			return;
+		}
+		
+		closeWall.showBarrier(player);
+	}
+	
+	public static void playerLeftCombat(Player player) {		
+		Wall closeWall = getCloseWall(player.getLocation());
+		if (closeWall == null) {
+			return;
+		}
+		
+		closeWall.hideBarrier(player);
+	}
+	
+	private static Wall getCloseWall(Location loc) {
 		for (Wall wall : walls) {
 			if (wall.isCloseToWall(loc)) {
-				// TODO ativar os vidros para o jogador
-				return;
+				return wall;
 			}
 		}
+		
+		return null;
 	}
 
 }
