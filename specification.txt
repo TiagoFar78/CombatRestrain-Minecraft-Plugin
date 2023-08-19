@@ -1,0 +1,4 @@
+Em PvP Não Sairá:
+- Este plugin deverá criar uma barreira de vidro vermelho 4x3 na frente do player caso ele tente ultrapassar a linha da
+safe zone durante PvP, quando ele tiver saido de PvP os blocos irão sumir e deixarão ele passar (os blocos devem aparecer
+apenas para este player e não deve influenciar os outros jogadores).
