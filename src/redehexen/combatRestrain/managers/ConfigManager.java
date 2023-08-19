@@ -18,6 +18,8 @@ public class ConfigManager {
 	}
 	
 	private int _wallDistanceToShowBlocks;
+	private int _wallHeigth;
+	private int _wallWidth;
 	private Material _wallMaterial;
 	private byte _wallDataValue;
 	
@@ -50,6 +52,14 @@ public class ConfigManager {
 	public int getWallDistanceToShowBlocks() {
         return _wallDistanceToShowBlocks;
     }
+	
+	public int getWallHeight() {
+		return _wallHeigth;
+	}
+	
+	public int getWallWidth() {
+		return _wallWidth;
+	}
 	
 	public Material getWallMaterial() {
 		return _wallMaterial;
