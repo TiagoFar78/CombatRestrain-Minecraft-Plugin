@@ -1,5 +1,6 @@
 package redehexen.combatRestrain.managers;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import redehexen.combatRestrain.CombatRestrain;
@@ -17,6 +18,8 @@ public class ConfigManager {
 	}
 	
 	private int _wallDistanceToShowBlocks;
+	private Material _wallMaterial;
+	private byte _wallDataValue;
 	
 	private String _positionSetMessage;
 	private String _reloadedMessage;
@@ -47,6 +50,14 @@ public class ConfigManager {
 	public int getWallDistanceToShowBlocks() {
         return _wallDistanceToShowBlocks;
     }
+	
+	public Material getWallMaterial() {
+		return _wallMaterial;
+	}
+	
+	public byte getWallDataValue() {
+		return _wallDataValue;
+	}
 	
 	public String getPositionSetMessage() {
         return _positionSetMessage;
