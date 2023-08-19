@@ -80,8 +80,12 @@ public class Wall {
 		return null;
 	}
 	
-	private boolean isXAxis(Location loc) {
+	private boolean isXAxis(Location centralBlock) {
 		return false;
+	}
+	
+	private int getFixedCord(Location centralBlock) {
+		return 1;
 	}
 	
 //	>------------------------------------{ Barrier }------------------------------------<
@@ -111,7 +115,7 @@ public class Wall {
 
 		Location centralBlock = getCentralBlock();
 		
-		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock));
+		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock), getFixedCord(centralBlock));
 	}
 	
 }
