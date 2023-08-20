@@ -71,12 +71,9 @@ public class WallsManager {
 	}
 	
 	public static void playerLeftCombat(Player player) {		
-		Wall closeWall = getCloseWall(player.getLocation());
-		if (closeWall == null) {
-			return;
+		for (Wall wall : walls) {
+			wall.leftCombat(player);
 		}
-		
-		closeWall.hideBarrier(player);
 	}
 	
 	private static Wall getCloseWall(Location loc) {

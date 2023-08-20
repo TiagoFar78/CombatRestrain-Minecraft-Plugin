@@ -131,6 +131,14 @@ public class Wall {
 			return _loc2.getBlockX();
 		}
 		
+		//TODO remove this after tests
+		try {
+			throw new InstantiationException();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		
 		return 0;
 	}
 	
@@ -141,6 +149,8 @@ public class Wall {
 	}
 	
 	private void removeBarrierFromList(Player player) {
+		hideBarrier(player);
+		
 		_playersBarriers.remove(player);
 	}
 	
@@ -167,6 +177,12 @@ public class Wall {
 		Location centralBlock = getCentralBlock(player.getLocation());
 		
 		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock), getFixedCord(centralBlock));
+	}
+	
+//	>-------------------------------------{ Player }-------------------------------------<
+	
+	public void leftCombat(Player player) {
+		removeBarrierFromList(player);
 	}
 	
 }

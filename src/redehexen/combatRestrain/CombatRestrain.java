@@ -20,7 +20,7 @@ public class CombatRestrain extends JavaPlugin {
 			saveDefaultConfig();
 		}
 		
-//		getServer().getPluginManager().registerEvents(new Events(), this);
+		getServer().getPluginManager().registerEvents(new Events(), this);
 		
 		getCommand("CombatRestrain").setExecutor(new CombatRestrainCommand());
 	}
