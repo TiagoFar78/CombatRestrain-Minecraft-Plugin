@@ -1,0 +1,7 @@
+name: TF_CombatRestrain
+version: 1.0
+author: TiagoFar78
+main: redehexen.combatRestrain.CombatRestrain
+commands:
+  CombatRestrain:
+  
