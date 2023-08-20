@@ -51,12 +51,15 @@ public class WallsManager {
 	public static void analyzeMovement(Player player, Location loc) {
 		// TODO check if player is in combat and return if not
 		
+		System.out.println("Analisou e walls temos:");
+		System.out.println(walls);
+		
 		Wall closeWall = getCloseWall(loc);
 		if (closeWall == null) {
 			return;
 		}
 
-		closeWall.showBarrier(player);
+		closeWall.showBarrier(player, loc);
 	}
 	
 	public static void playerEnteredCombat(Player player) {
@@ -67,7 +70,7 @@ public class WallsManager {
 			return;
 		}
 		
-		closeWall.showBarrier(player);
+		closeWall.showBarrier(player, loc);
 	}
 	
 	public static void playerLeftCombat(Player player) {		

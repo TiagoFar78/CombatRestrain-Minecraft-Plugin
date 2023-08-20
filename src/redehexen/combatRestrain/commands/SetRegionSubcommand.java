@@ -42,7 +42,7 @@ public class SetRegionSubcommand implements CombatRestrainSubcommand {
 		int y = playerLoc.getBlockY();
 		int z = playerLoc.getBlockZ();
 		
-		String path = "Regions." + regionName + ".";
+		String path = "Walls." + regionName + ".";
 		
 		YamlConfiguration config = CombatRestrain.getYamlConfiguration();
 		

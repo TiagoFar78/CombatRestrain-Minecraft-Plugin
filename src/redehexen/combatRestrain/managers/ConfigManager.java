@@ -40,7 +40,7 @@ public class ConfigManager {
 		_wallHeight = config.getInt("WallHeight");
 		_wallWidth = config.getInt("WallWidth");
 		_wallMaterial = Material.getMaterial(config.getString("WallMaterial"));
-		_wallDataValue = (byte) config.getInt("WallMaterial");
+		_wallDataValue = (byte) config.getInt("WallDataValue");
 		
 		_positionSetMessage = config.getString("Messages.Warnings.PositionSet").replace("&", "§");
 		_reloadedMessage = config.getString("Messages.Warnings.Reloaded").replace("&", "§");

@@ -50,17 +50,26 @@ public class Wall {
 	
 //	>--------------------------------------{ Wall }--------------------------------------<
 	
-	public boolean isCloseToWall(Location loc) {
-		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
-		
+	public boolean isCloseToWall(Location loc) {		
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
+		
+		if (!isInsideWalls(x, z)) {
+			return false;
+		}
+		
+		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
 		
 		return isCloseToBorder(x, _loc1.getBlockX(), false, closeDistance, y) || 
 				isCloseToBorder(x, _loc2.getBlockX(), true, closeDistance, y) ||
 				isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y) ||
 				isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y);
+	}
+	
+	private boolean isInsideWalls(int x, int z) {
+		return _loc1.getBlockX() <= x && x <= _loc2.getBlockX() && 
+				_loc1.getBlockZ() <= z && z <= _loc2.getBlockZ();
 	}
 	
 	private boolean isCloseToBorder(int cord, int borderCord, boolean isFurtherBorder, int closeDistance, int yCord) {
@@ -82,6 +91,11 @@ public class Wall {
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
 		
+		System.out.println("Vai tentar fazer o central block");
+		System.out.println("Loc1: " + _loc1.getBlockX() + " " + _loc1.getBlockY() + " " + _loc1.getBlockY());
+		System.out.println("Loc2: " + _loc2.getBlockX() + " " + _loc2.getBlockY() + " " + _loc2.getBlockY());
+		System.out.println("Player: " + x + " " + y + " " + z);
+		
 		if (isCloseToBorder(x, _loc1.getBlockX(), false, closeDistance, y)) {
 			return new Location(loc.getWorld(), x, y, _loc1.getBlockZ());
 		}
@@ -98,6 +112,14 @@ public class Wall {
 			return new Location(loc.getWorld(), _loc2.getBlockX(), y, z);
 		}
 		
+		//TODO remove this after tests
+		try {
+			System.out.println("Devia dar erro lol");
+			throw new InstantiationException();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -167,14 +189,14 @@ public class Wall {
 		barrier.removeBarrier(player);
 	}
 	
-	public void showBarrier(Player player) {
+	public void showBarrier(Player player, Location loc) {
 		PlayerBarrier barrier = getBarrier(player);
 		if (barrier == null) {
 			barrier = new PlayerBarrier();
 			addBarrierToList(player, barrier);
 		}
 
-		Location centralBlock = getCentralBlock(player.getLocation());
+		Location centralBlock = getCentralBlock(loc);
 		
 		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock), getFixedCord(centralBlock));
 	}

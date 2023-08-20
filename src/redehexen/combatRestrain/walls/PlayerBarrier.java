@@ -22,6 +22,11 @@ public class PlayerBarrier {
 		
 		Material wallMaterial = configManager.getWallMaterial();
 		byte wallDataValue = configManager.getWallDataValue();
+
+		System.out.println("Central block: " + centralBlock.getBlockX() + " " + centralBlock.getBlockY() + " " +
+				centralBlock.getBlockX() + " " + centralBlock.getBlockZ());
+		System.out.println("blocks list:");
+		System.out.println(getBarrierBlocks(centralBlock, isXAxis, fixedCord));
 		
 		for (Location barrierBlock : getBarrierBlocks(centralBlock, isXAxis, fixedCord)) {
 			player.sendBlockChange(barrierBlock, wallMaterial, wallDataValue);
