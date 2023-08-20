@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender;
 
 import redehexen.combatRestrain.CombatRestrain;
 import redehexen.combatRestrain.managers.ConfigManager;
+import redehexen.combatRestrain.managers.WallsManager;
 
 public class ReloadSubcommand implements CombatRestrainSubcommand {
 
@@ -17,7 +18,7 @@ public class ReloadSubcommand implements CombatRestrainSubcommand {
 		}
 		
 		ConfigManager.reload();
-		DomainRegionsManager.reload();
+		WallsManager.reload();
 		
 		sender.sendMessage(configManager.getReloadedMessage());
 	}
