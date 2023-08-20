@@ -1,7 +1,7 @@
 WallDistanceToShowBlocks: 5
 WallHeight: 3
 WallWidth: 5
-WallMaterial: GLASS 
+WallMaterial: STAINED_GLASS 
 WallDataValue: 14
 Messages:
   Warnings:
