@@ -86,83 +86,34 @@ public class Wall {
 		return borderCord <= cord && cord <= borderCord + closeDistance;
 	}
 	
-	private Location getCentralBlock(Location loc) {
+	private BarrierCentralBlock getCentralBlock(Location loc) {
 		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
 		
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
 		
-		System.out.println("Vai tentar fazer o central block");
-		System.out.println("Loc1: " + _loc1.getBlockX() + " " + _loc1.getBlockY() + " " + _loc1.getBlockY());
-		System.out.println("Loc2: " + _loc2.getBlockX() + " " + _loc2.getBlockY() + " " + _loc2.getBlockY());
-		System.out.println("Player: " + x + " " + y + " " + z);
-		
 		if (isCloseToBorder(x, _loc1.getBlockX(), false, closeDistance, y)) {
-			return new Location(loc.getWorld(), _loc1.getBlockX(), y, z).add(0, HEAD_HEIGHT, 0);
+			Location centralBlockLoc = new Location(loc.getWorld(), _loc1.getBlockX(), y, z).add(0, HEAD_HEIGHT, 0);
+			return new BarrierCentralBlock(centralBlockLoc, false, _loc1.getBlockX());
 		}
 		
 		if (isCloseToBorder(x, _loc2.getBlockX(), true, closeDistance, y)) {
-			return new Location(loc.getWorld(), _loc2.getBlockX(), y, z).add(0, HEAD_HEIGHT, 0);
+			Location centralBlockLoc = new Location(loc.getWorld(), _loc2.getBlockX(), y, z).add(0, HEAD_HEIGHT, 0);
+			return new BarrierCentralBlock(centralBlockLoc, false, _loc2.getBlockX());
 		}
 		
 		if (isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y)) {
-			return new Location(loc.getWorld(), x, y, _loc1.getBlockZ()).add(0, HEAD_HEIGHT, 0);
+			Location centralBlockLoc = new Location(loc.getWorld(), x, y, _loc1.getBlockZ()).add(0, HEAD_HEIGHT, 0);
+			return new BarrierCentralBlock(centralBlockLoc, true, _loc1.getBlockZ());
 		}
 		
 		if (isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y)) {
-			return new Location(loc.getWorld(), x, y, _loc2.getBlockZ()).add(0, HEAD_HEIGHT, 0);
+			Location centralBlockLoc = new Location(loc.getWorld(), x, y, _loc2.getBlockZ()).add(0, HEAD_HEIGHT, 0);
+			return new BarrierCentralBlock(centralBlockLoc, true, _loc1.getBlockZ());
 		}
 		
-		//TODO remove this after tests
-		try {
-			throw new InstantiationException();
-		}
-		catch (InstantiationException e) {
-			e.printStackTrace();
-		}
 		return null;
-	}
-	
-	private boolean isXAxis(Location centralBlock) {
-		int closeDistance = ConfigManager.getInstance().getWallDistanceToShowBlocks();
-
-		int y = centralBlock.getBlockY();
-		int z = centralBlock.getBlockZ();
-		
-		return isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y) ||
-				isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y);
-	}
-	
-	private int getFixedCord(Location centralBlock) {
-		int x = centralBlock.getBlockX();
-		int z = centralBlock.getBlockZ();
-		
-		if (x == _loc1.getBlockX()) {
-			return _loc1.getBlockZ();
-		}
-		
-		if (x == _loc2.getBlockX()) {
-			return _loc2.getBlockZ();
-		}
-		
-		if (z == _loc1.getBlockZ()) {
-			return _loc1.getBlockX();
-		}
-		
-		if (z == _loc2.getBlockZ()) {
-			return _loc2.getBlockX();
-		}
-		
-		//TODO remove this after tests
-		try {
-			throw new InstantiationException();
-		}
-		catch (InstantiationException e) {
-			e.printStackTrace();
-		}
-		
-		return 0;
 	}
 	
 //	>------------------------------------{ Barrier }------------------------------------<
@@ -197,9 +148,9 @@ public class Wall {
 			addBarrierToList(player, barrier);
 		}
 
-		Location centralBlock = getCentralBlock(loc);
+		BarrierCentralBlock centralBlock = getCentralBlock(loc);
 		
-		barrier.placeBarrier(player, centralBlock, isXAxis(centralBlock), getFixedCord(centralBlock));
+		barrier.placeBarrier(player, centralBlock.getLoc(), centralBlock.isXAxis(), centralBlock.getFixedCord());
 	}
 	
 //	>-------------------------------------{ Player }-------------------------------------<

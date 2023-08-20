@@ -23,16 +23,12 @@ public class PlayerBarrier {
 		
 		Material wallMaterial = configManager.getWallMaterial();
 		byte wallDataValue = configManager.getWallDataValue();
-
-		System.out.println("Central block: " + centralBlock.getBlockX() + " " + centralBlock.getBlockY() + 
-				" " + centralBlock.getBlockZ());
-		System.out.println("blocks list:");
-		System.out.println(getBarrierBlocks(centralBlock, isXAxis, fixedCord));
 		
 		World world = centralBlock.getWorld();
 		for (Location barrierBlock : getBarrierBlocks(centralBlock, isXAxis, fixedCord)) {
-			if (world.getBlockAt(barrierBlock).getType() != Material.AIR) {
+			if (world.getBlockAt(barrierBlock).getType() == Material.AIR) {
 				player.sendBlockChange(barrierBlock, wallMaterial, wallDataValue);
+				_barrierBlocks.add(barrierBlock);
 			}
 		}
 	}
@@ -42,6 +38,8 @@ public class PlayerBarrier {
 		for (Location barrierBlock : _barrierBlocks) {
 			player.sendBlockChange(barrierBlock, AIR, (byte) 0);
 		}
+		
+		_barrierBlocks.clear();
 	}
 	
 	private List<Location> getBarrierBlocks(Location centralBlock, boolean isXAxis, int fixedCord) {
@@ -63,10 +61,10 @@ public class PlayerBarrier {
 	
 	private Location createBarrierLocation(Location centralBlock, boolean isXAxis, int fixedCord, int width, int heigth) {
 		if (isXAxis) {
-			return new Location(centralBlock.getWorld(), fixedCord, heigth, width);
+			return new Location(centralBlock.getWorld(), width, heigth, fixedCord);
 		}
 		
-		return new Location(centralBlock.getWorld(), width, heigth, fixedCord);
+		return new Location(centralBlock.getWorld(), fixedCord, heigth, width);
 	}
 	
 	private int[][] getBarrierLimits(Location centralBlock, boolean isXAxis) {
