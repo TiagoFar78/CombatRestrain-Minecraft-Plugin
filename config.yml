@@ -1,4 +1,8 @@
 WallDistanceToShowBlocks: 5
+WallHeight: 3
+WallWidth: 5
+WallMaterial: GLASS 
+WallDataValue: 14
 Messages:
   Warnings:
     PositionSet: "&aPosition set successfully. Dont forget to use &f/ClanDominanceAlert reload"

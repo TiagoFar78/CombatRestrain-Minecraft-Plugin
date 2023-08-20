@@ -18,7 +18,7 @@ public class ConfigManager {
 	}
 	
 	private int _wallDistanceToShowBlocks;
-	private int _wallHeigth;
+	private int _wallHeight;
 	private int _wallWidth;
 	private Material _wallMaterial;
 	private byte _wallDataValue;
@@ -36,7 +36,11 @@ public class ConfigManager {
 	private ConfigManager() {
 		YamlConfiguration config = CombatRestrain.getYamlConfiguration();
 		
-		FORCAR ERRO FAZER TUDO AQUI PARA CIMA
+		_wallDistanceToShowBlocks = config.getInt("WallDistanceToShowBlocks");
+		_wallHeight = config.getInt("WallHeight");
+		_wallWidth = config.getInt("WallWidth");
+		_wallMaterial = Material.getMaterial(config.getString("WallMaterial"));
+		_wallDataValue = (byte) config.getInt("WallMaterial");
 		
 		_positionSetMessage = config.getString("Messages.Warnings.PositionSet").replace("&", "§");
 		_reloadedMessage = config.getString("Messages.Warnings.Reloaded").replace("&", "§");
@@ -54,7 +58,7 @@ public class ConfigManager {
     }
 	
 	public int getWallHeight() {
-		return _wallHeigth;
+		return _wallHeight;
 	}
 	
 	public int getWallWidth() {
