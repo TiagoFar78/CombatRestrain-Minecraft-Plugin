@@ -11,6 +11,8 @@ import redehexen.combatRestrain.managers.ConfigManager;
 
 public class Wall {
 	
+	private static final int HEAD_HEIGHT = 1;
+	
 	private Location _loc1;
 	private Location _loc2;
 	private Hashtable<Player, PlayerBarrier> _playersBarriers = new Hashtable<Player, PlayerBarrier>();
@@ -97,24 +99,23 @@ public class Wall {
 		System.out.println("Player: " + x + " " + y + " " + z);
 		
 		if (isCloseToBorder(x, _loc1.getBlockX(), false, closeDistance, y)) {
-			return new Location(loc.getWorld(), x, y, _loc1.getBlockZ());
+			return new Location(loc.getWorld(), _loc1.getBlockX(), y, z).add(0, HEAD_HEIGHT, 0);
 		}
 		
 		if (isCloseToBorder(x, _loc2.getBlockX(), true, closeDistance, y)) {
-			return new Location(loc.getWorld(), x, y, _loc2.getBlockZ());
+			return new Location(loc.getWorld(), _loc2.getBlockX(), y, z).add(0, HEAD_HEIGHT, 0);
 		}
 		
 		if (isCloseToBorder(z, _loc1.getBlockZ(), false, closeDistance, y)) {
-			return new Location(loc.getWorld(), _loc1.getBlockX(), y, z);
+			return new Location(loc.getWorld(), x, y, _loc1.getBlockZ()).add(0, HEAD_HEIGHT, 0);
 		}
 		
 		if (isCloseToBorder(z, _loc2.getBlockZ(), true, closeDistance, y)) {
-			return new Location(loc.getWorld(), _loc2.getBlockX(), y, z);
+			return new Location(loc.getWorld(), x, y, _loc2.getBlockZ()).add(0, HEAD_HEIGHT, 0);
 		}
 		
 		//TODO remove this after tests
 		try {
-			System.out.println("Devia dar erro lol");
 			throw new InstantiationException();
 		}
 		catch (InstantiationException e) {
