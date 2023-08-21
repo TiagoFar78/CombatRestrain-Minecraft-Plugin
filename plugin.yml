@@ -4,4 +4,5 @@ author: TiagoFar78
 main: redehexen.combatRestrain.CombatRestrain
 commands:
   CombatRestrain:
-  
+depend:
+- CombatTagPlus
