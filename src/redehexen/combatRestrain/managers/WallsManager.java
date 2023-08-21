@@ -49,7 +49,11 @@ public class WallsManager {
 	}
 	
 	public static void analyzeMovement(Player player, Location loc) {
-		// TODO check if player is in combat and return if not
+		boolean isInCombat = CombatRestrain.getCombatTagPlus().getTagManager().isTagged(player.getUniqueId());
+		if (!isInCombat) {
+			playerLeftCombat(player);
+			return;
+		}
 		
 		for (Wall wall : walls) {
 			wall.hideBarrier(player);

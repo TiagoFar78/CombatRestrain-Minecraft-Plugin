@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.minelink.ctplus.CombatTagPlus;
 import redehexen.combatRestrain.commands.CombatRestrainCommand;
 
 public class CombatRestrain extends JavaPlugin {
@@ -45,6 +46,10 @@ public class CombatRestrain extends JavaPlugin {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	public static CombatTagPlus getCombatTagPlus() {
+		return (CombatTagPlus)Bukkit.getServer().getPluginManager().getPlugin("CombatTagPlus");
 	}
 
 }
